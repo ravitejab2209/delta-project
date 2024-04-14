@@ -99,7 +99,7 @@ app.use("/", userRouter);
 
 
 app.all("*", (req, res, next) => {
-    next(new ExpressError(404, "Page Not Found! :("))
+    next(new ExpressError(404, "Login!! :("))
 })
 
 app.use((err, req, res, next) => {
