@@ -16,9 +16,16 @@ const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
+require('dotenv').config();
 
 //Mongo Atlas URL
-const dbUrl=("mongodb://127.0.0.1:27017/wanderlust");
+// const dbUrl=("mongodb://127.0.0.1:27017/wanderlust");
+const dbUrl=process.env.ATLASDB_URL;
+
+mongoose.connect(dbUrl, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
 
 const store= MongoStore.create({
     mongoUrl:dbUrl,
@@ -43,12 +50,6 @@ const sessionOptions = {
         httpOnly: true
     }
 };
-
-// app.get("/", (req, res) => {
-//     res.send("Hello, I am root");
-// });
-
-//DB  MongoStore
 
 
 app.use(session(sessionOptions));
@@ -81,8 +82,7 @@ main()
     .catch(err => console.log(err));
 
 async function main() {
-    await mongoose.connect('mongodb://127.0.0.1:27017/wanderlust');
-    // await mongoose.connect(dbUrl);
+    await mongoose.connect(dbUrl);
 }
 
 app.set("view engine", "ejs");
