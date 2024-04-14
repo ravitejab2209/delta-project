@@ -99,7 +99,7 @@ app.use("/", userRouter);
 
 
 app.all("*", (req, res, next) => {
-    next(new ExpressError(404, "Login!! :("))
+    next(new ExpressError(404, "Click on the Red Icon/ Explore!"))
 })
 
 app.use((err, req, res, next) => {
